@@ -16,7 +16,7 @@ npm i -g hampster
 
 Put your package information in `hampster.json`:
 
-```bash
+```json
 {
   "packages": [
     {
