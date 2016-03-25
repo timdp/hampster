@@ -40,12 +40,12 @@ hampster /path/to/hampster.json
 
 This will make Hampster do the following:
 
- 1. For every package defined in `hampster.json`, check if a directory by that
+1.  For every package defined in `hampster.json`, check if a directory by that
     `name` already exists in the current working directory. If no such directory
     exists, perform a `git clone` on the `repository`.
- 2. For every package, run `npm install` and `npm link` inside its repository.
- 3. For every package, inspect its `package.json` to build a dependency tree.
- 4. Walk the dependency tree and run `npm link <dependencies>` where possible.
+2.  For every package, run `npm install` and `npm link` inside its repository.
+3.  For every package, inspect its `package.json` to build a dependency tree.
+4.  Walk the dependency tree and run `npm link <dependencies>` where possible.
 
 ## Options
 
