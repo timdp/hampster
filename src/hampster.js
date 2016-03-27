@@ -22,17 +22,24 @@ const argv = yargs
 
 let config
 
-const spawn = (cmd, args, cwd) => {
+const spawn = async (cmd, args, cwd) => {
   console.info('Running', cmd, ...args, 'in', cwd, '...')
-  return crossSpawn(cmd, args, {cwd})
+  try {
+    await crossSpawn(cmd, args, {cwd})
+  } catch (err) {
+    if (err.stderr) {
+      console.error(err.stderr.toString())
+    }
+    throw err
+  }
 }
 
 const isDir = async (dirPath) => {
+  let stats
   try {
-    return (await fsp.stat(dirPath)).isDirectory()
-  } catch (err) {
-    return false
-  }
+    stats = await fsp.stat(dirPath)
+  } catch (err) {}
+  return (stats != null && stats.isDirectory())
 }
 
 const cloneOrPull = async ({name, repository}) => {
