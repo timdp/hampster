@@ -47,6 +47,8 @@ This will make Hampster do the following:
 3.  For every package, inspect its `package.json` to build a dependency tree.
 4.  Walk the dependency tree and run `npm link <dependencies>` where possible.
 
+You can also specify the URL to `hampster.json` instead of a local path.
+
 ## Options
 
 ### `--pull`

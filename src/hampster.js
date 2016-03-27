@@ -3,6 +3,8 @@
 import 'source-map-support/register'
 import stamp from 'console-stamp'
 import crossSpawn from 'cross-spawn-promise'
+import got from 'got'
+import isUrl from 'is-url'
 import yargs from 'yargs'
 import fsp from 'fs-promise'
 import path from 'path'
@@ -104,7 +106,15 @@ const checkResult = (deps) => {
   }
 }
 
-const main = async () => {
+const readConfig = async (configFile) => {
+  console.info('Reading', configFile, '...')
+  config = isUrl(configFile)
+    ? (await got(configFile, {json: true})).body
+    : await fsp.readJson(configFile)
+}
+
+const main = async (configFile) => {
+  await readConfig(configFile)
   console.info('Setting up ...')
   for (const pkg of config.packages) {
     await cloneOrPull(pkg)
@@ -115,8 +125,5 @@ const main = async () => {
 }
 
 ;(async () => {
-  const configFile = argv._[0]
-  console.info('Reading', configFile, '...')
-  config = await fsp.readJson(configFile)
-  await main()
+  await main(...argv._)
 })().catch((err) => console.error(err.stack || err))
