@@ -113,10 +113,10 @@ const readConfig = async (configFile) => {
   let configStr, filename
   if (isUrl(configFile)) {
     configStr = (await got(configFile)).body
-    filename = configFile
-  } else {
-    configFile = fsp.readFile(configFile, 'utf8')
     filename = url.parse(configFile).pathname
+  } else {
+    configStr = await fsp.readFile(configFile, 'utf8')
+    filename = configFile
   }
   const ext = path.extname(filename)
   const isYaml = (['.yml', '.yaml'].indexOf(ext) >= 0)
