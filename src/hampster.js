@@ -5,6 +5,7 @@ import stamp from 'console-stamp'
 import crossSpawn from 'cross-spawn-promise'
 import got from 'got'
 import isUrl from 'is-url'
+import updateNotifier from 'update-notifier'
 import yaml from 'js-yaml'
 import yargs from 'yargs'
 import fsp from 'fs-promise'
@@ -124,6 +125,8 @@ const readConfig = async (configFile) => {
 }
 
 const main = async (configFile) => {
+  const pkg = await fsp.readJson(path.resolve(__dirname, '..', 'package.json'))
+  updateNotifier({pkg}).notify()
   config = await readConfig(configFile)
   console.info('Setting up ...')
   for (const pkg of config.packages) {
