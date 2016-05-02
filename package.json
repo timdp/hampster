@@ -1,6 +1,6 @@
 {
   "name": "hampster",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Clones, installs, and links interdependent npm packages.",
   "author": "Tim De Pauw <hi@tmdpw.eu> (https://tmdpw.eu/)",
   "engines": {
@@ -15,6 +15,7 @@
     "lib/"
   ],
   "scripts": {
+    "start": "node lib/hampster.js",
     "clean": "gulp clean",
     "build": "gulp build",
     "prepublish": "npm run clean && npm run build",
@@ -31,6 +32,7 @@
     "is-url": "^1.2.1",
     "js-yaml": "^3.5.5",
     "source-map-support": "^0.4.0",
+    "update-notifier": "^0.6.3",
     "yargs": "^4.3.2"
   },
   "devDependencies": {

@@ -5,6 +5,7 @@ import stamp from 'console-stamp'
 import crossSpawn from 'cross-spawn-promise'
 import got from 'got'
 import isUrl from 'is-url'
+import updateNotifier from 'update-notifier'
 import yaml from 'js-yaml'
 import yargs from 'yargs'
 import fsp from 'fs-promise'
@@ -120,10 +121,10 @@ const readConfig = async (configFile) => {
   let configStr, filename
   if (isUrl(configFile)) {
     configStr = (await got(configFile)).body
-    filename = configFile
-  } else {
-    configFile = fsp.readFile(configFile, 'utf8')
     filename = url.parse(configFile).pathname
+  } else {
+    configStr = await fsp.readFile(configFile, 'utf8')
+    filename = configFile
   }
   const ext = path.extname(filename)
   const isYaml = (['.yml', '.yaml'].indexOf(ext) >= 0)
@@ -131,6 +132,8 @@ const readConfig = async (configFile) => {
 }
 
 const main = async (configFile) => {
+  const pkg = await fsp.readJson(path.resolve(__dirname, '..', 'package.json'))
+  updateNotifier({pkg}).notify()
   config = await readConfig(configFile)
   console.info('Setting up ...')
   for (const pkg of config.packages) {
