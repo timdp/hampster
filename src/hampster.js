@@ -49,9 +49,10 @@ const cloneOrPull = async ({name, repository}) => {
   if (!exists) {
     console.info('Cloning', name, '...')
     await spawn('git', ['clone', repository], root)
-  } else if (argv.pull) {
+  } else if (argv.pull || argv.rebase) {
     console.info('Updating', name, '...')
-    await spawn('git', ['pull'], dirPath)
+    const args = argv.rebase ? ['pull', '--rebase'] : ['pull']
+    await spawn('git', args, dirPath)
   } else {
     console.info(name, 'already exists, not cloning')
   }
