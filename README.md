@@ -51,7 +51,7 @@ This command will make Hampster do the following:
 
 1.  For every package defined in `hampster.json`, check if a directory by that
     `name` already exists in the current working directory. If no such directory
-    exists, perform a `git clone` on the `repository`.
+    exists, perform a `git clone --recursive` on the `repository`.
 
 2.  For every package, run `npm install` and `npm link` inside its repository.
 
@@ -69,6 +69,11 @@ are never specified, so Git will decide.
 ### `--rebase`
 
 Like `--pull`, but using `git pull --rebase`.
+
+### `--no-recursive`
+
+Perform `git clone` without the `--recursive` flag and `git pull` without the
+`--recurse-submodules` flag.
 
 ## Author
 

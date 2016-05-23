@@ -19,6 +19,8 @@ const root = process.cwd()
 const argv = yargs
   .demand(1)
   .boolean('pull')
+  .boolean('rebase')
+  .boolean('recursive').default('recursive', true)
   .argv
 
 let config
@@ -48,10 +50,19 @@ const cloneOrPull = async ({name, repository}) => {
   const exists = await isDir(dirPath)
   if (!exists) {
     console.info('Cloning', name, '...')
-    await spawn('git', ['clone', repository], root)
+    await spawn('git',
+      argv.recursive ? ['clone', '--recursive', repository]
+        : ['clone', repository],
+      root)
   } else if (argv.pull || argv.rebase) {
     console.info('Updating', name, '...')
-    const args = argv.rebase ? ['pull', '--rebase'] : ['pull']
+    const args = ['pull']
+    if (argv.rebase) {
+      args.push('--rebase')
+    }
+    if (argv.recursive) {
+      args.push('--recurse-submodules')
+    }
     await spawn('git', args, dirPath)
   } else {
     console.info(name, 'already exists, not cloning')
