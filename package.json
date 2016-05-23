@@ -1,6 +1,6 @@
 {
   "name": "hampster",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Clones, installs, and links interdependent npm packages.",
   "author": "Tim De Pauw <hi@tmdpw.eu> (https://tmdpw.eu/)",
   "engines": {
