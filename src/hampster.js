@@ -98,8 +98,6 @@ const install = async (pkg, deps) => {
   } else {
     console.info(pkg, 'has no linked dependencies')
   }
-  console.info('Installing', pkg, '...')
-  await spawn('npm', ['install'], pkgPath)
   console.info('Linking', pkg, '...')
   await spawn('npm', ['link'], pkgPath)
 }

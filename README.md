@@ -53,7 +53,7 @@ This command will make Hampster do the following:
     `name` already exists in the current working directory. If no such directory
     exists, perform a `git clone --recursive` on the `repository`.
 
-2.  For every package, run `npm install` and `npm link` inside its repository.
+2.  For every package, run `npm link` inside its repository.
 
 3.  For every package, inspect its `package.json` to build a dependency tree.
 
