@@ -75,6 +75,10 @@ Like `--pull`, but using `git pull --rebase`.
 Perform `git clone` without the `--recursive` flag and `git pull` without the
 `--recurse-submodules` flag.
 
+### `--version`
+
+Display Hampster's version number.
+
 ## Author
 
 [Tim De Pauw](https://tmdpw.eu/)
