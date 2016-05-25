@@ -63,8 +63,8 @@ This command will make Hampster do the following:
 
 ### `--pull`
 
-Perform a `git pull` for previously cloned repositories. The remote and branch
-are never specified, so Git will decide.
+Perform a `git pull --recurse-submodules` for previously cloned repositories.
+The remote and branch are never specified, so Git will decide.
 
 ### `--rebase`
 
