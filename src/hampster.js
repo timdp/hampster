@@ -12,16 +12,17 @@ import fsp from 'fs-promise'
 import path from 'path'
 import url from 'url'
 
-stamp(console)
-
-const root = process.cwd()
-
 const argv = yargs
+  .version()
   .demand(1)
   .boolean('pull')
   .boolean('rebase')
   .boolean('recursive').default('recursive', true)
   .argv
+
+stamp(console)
+
+const root = process.cwd()
 
 let config
 
