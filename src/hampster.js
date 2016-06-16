@@ -22,6 +22,8 @@ const argv = yargs
 
 stamp(console)
 
+const reScope = /^@[^/]+\//
+
 const root = process.cwd()
 
 let config
@@ -46,8 +48,10 @@ const isDir = async (dirPath) => {
   return (stats != null && stats.isDirectory())
 }
 
+const toPackagePath = (name) => path.join(root, name.replace(reScope, ''))
+
 const cloneOrPull = async ({name, repository}) => {
-  const dirPath = path.join(root, name)
+  const dirPath = toPackagePath(name)
   const exists = await isDir(dirPath)
   if (!exists) {
     console.info('Cloning', name, '...')
@@ -77,7 +81,7 @@ const getDependencies = async () => {
     pkgs[name] = true
   }
   for (const {name} of config.packages) {
-    const pkgJsonPath = path.join(root, name, 'package.json')
+    const pkgJsonPath = path.join(toPackagePath(name), 'package.json')
     const pkgJson = await fsp.readJson(pkgJsonPath)
     deps[name] = Object.keys(pkgJson.dependencies || {})
       .filter((str) => pkgs[str])
@@ -92,7 +96,7 @@ const determinePackageToInstall = (deps, installed) => {
 }
 
 const install = async (pkg, deps) => {
-  const pkgPath = path.join(root, pkg)
+  const pkgPath = toPackagePath(pkg)
   if (deps.length > 0) {
     console.info('Linking', pkg, 'dependencies ...')
     await spawn('npm', ['link', ...deps], pkgPath)
