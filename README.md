@@ -1,6 +1,6 @@
 # Hampster
 
-[![npm](https://img.shields.io/npm/v/hampster.svg)](https://www.npmjs.com/package/hampster) [![Dependencies](https://img.shields.io/david/timdp/hampster.svg)](https://david-dm.org/timdp/hampster) [![JavaScript Standard Style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](https://github.com/feross/standard)
+[![npm](https://img.shields.io/npm/v/hampster.svg)](https://www.npmjs.com/package/hampster) [![Dependencies](https://img.shields.io/david/timdp/hampster.svg)](https://david-dm.org/timdp/hampster) [![JavaScript Standard Style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 
 Clones, installs, and links interdependent npm packages.
 
