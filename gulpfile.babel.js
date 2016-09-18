@@ -7,15 +7,10 @@ const DEST = 'lib'
 
 const $ = loadPlugins()
 
-const plumb = () => $.plumber({
-  errorHandler: $.notify.onError('<%= error.message %>')
-})
-
 gulp.task('clean', () => del.sync(DEST))
 
 gulp.task('transpile', () => {
   return gulp.src('src/**/*.js')
-    .pipe(plumb())
     .pipe($.sourcemaps.init())
     .pipe($.babel())
     .pipe($.sourcemaps.write())
@@ -24,7 +19,6 @@ gulp.task('transpile', () => {
 
 gulp.task('lint', () => {
   return gulp.src('src/**/*.js')
-    .pipe(plumb())
     .pipe($.standard())
     .pipe($.standard.reporter('default', {
       breakOnError: false
